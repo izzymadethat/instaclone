@@ -1,0 +1,20 @@
+<%= stylesheet_link_tag("post")%>
+<div class="row">
+    <div class="col-12 text-center" style="padding: 20px; background-color: #f2f2f2">
+        <% if @user.avatar.attached? %>
+            <%= image_tag @user.avatar, class:"profile-image" %>
+        <% end %>
+
+        <% if current_user.following?(@user) %>
+            <%= button_to "Unfollow", unfollow_path(@user) %>
+        <% elsif current_user.sent_follow_request_to?(@user) %>
+            <%= button_to "Cancel Follow Request", cancel_path(@user) %>
+        <% else %>
+            <%= button_to "Follow", follow_path(@user) %>
+        <% end %>
+        <h2 ><%= @user.username %> </h2>
+        <h4 ><%= @user.email %> </h4>
+        <h2 ><%= @user.bio %> </h2>
+
+    </div>
+</div>

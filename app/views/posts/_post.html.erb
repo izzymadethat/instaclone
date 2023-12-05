@@ -1,0 +1,38 @@
+<div id="<%= dom_id post %>" class="text-center col-6 post-container" style="margin: auto;">
+
+  <p>
+    <%#= post.description %>
+  </p>
+
+  <p>
+    <%#= post.keywords %>
+  </p>
+  <p>
+    <%#= link_to '', post, class:"post-link" %>
+  </p>
+  <% if user_signed_in? %>
+    <% like = current_user.likes.find_by(post: post)%>
+    <% if like.nil? %>
+      <%= button_to "Like This Post", likes_path, params: { like: {post_id: post.id}}, method: :post %>
+    <% else %>
+      <%= button_to "Unlike This Post", like_path(like), method: :delete %>
+    <% end %>
+
+  <% end %>
+
+  <p><%= post.likes.count %> Likes</p>
+
+  <% post.images.each do |image| %>
+    <%= image_tag(image, style: "object-fit: contain; max-width:50%; height:auto;") %>
+  <% end %>
+
+  <p>
+    <%= post.title %>
+  </p>
+
+</div>
+<p class="text-center">
+    <%= link_to post.user.email, post.user %>
+    <%#= link_to "Show", post%>
+
+</p>

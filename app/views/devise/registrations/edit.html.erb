@@ -1,0 +1,73 @@
+<div class="row">
+  <div class="col-6" style="margin: auto; margin-top: 30px; margin-bottom:30px;">
+  <h2>Edit <%= resource_name.to_s.humanize %></h2>
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: {turbo: false}, html: { method: :put }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <div class="field">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control" %>
+    </div>
+
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <% end %>
+
+     <div class="field">
+        <%= f.label :username %><br />
+        <%= f.text_field :username, class:"form-control" %>
+      </div>
+      <div class="field">
+        <%= f.file_field :avatar, class:"form-control" %>
+      </div>
+      <div class="field">
+        <%= f.label :bio %><br />
+        <%= f.text_field :bio, class:"form-control" %>
+      </div>
+
+    <div class="field">
+      <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+      <%= f.password_field :password, autocomplete: "new-password", class:"form-control" %>
+      <% if @minimum_password_length %>
+        <p class="form-text"><em><sm><%= @minimum_password_length %> characters minimum</sm></em></p>
+      <% end %>
+    </div>
+
+    <div class="field">
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :current_password %>
+      <%= f.password_field :current_password, autocomplete: "current-password", class:"form-control" %>
+       <p class="form-text" style="font-style: italic">(we need your current password to confirm your changes)</p>
+    </div>
+  <br>
+    <div class="actions">
+      <%= f.submit "Update", class:"btn btn-success col-12" %>
+    </div>
+  <% end %>
+
+
+
+  <%= link_to "Back", :back %>
+  </div>
+</div>
+
+<br>
+
+
+<div class="row">
+  <div class="col-6" style="margin: auto; margin-top: 30px; margin-bottom:30px;">
+    <div class="card">
+      <h5 class="card-header text-center"><em>Unhappy?</em></h5>
+      <div class="card-body">
+        <h5 class="card-title">Cancel my account</h5>
+        <p class="card-text">We're sad to see you go. But we hope it's for the best. Please note that this is PERMANENT!!!</p>
+        <%= button_to "Cancel My Account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class:"btn btn-outline-danger" %>
+      </div>
+    </div>
+  </div>
+</div>
